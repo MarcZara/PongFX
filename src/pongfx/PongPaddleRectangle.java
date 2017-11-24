@@ -38,5 +38,14 @@ public class PongPaddleRectangle {
         topLeftX.add(x);
         topLeftY.add(y);
     }
+    public Line getLine(String side){
+        switch(side){
+            case "Top": return topSide;
+            case "Left": return leftSide;
+            case "Right": return rightSide;
+            case "Bottom": return bottomSide;
+                    }
+        return null;
+    }
 }
 

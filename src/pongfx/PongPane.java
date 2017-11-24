@@ -20,7 +20,9 @@ public class PongPane extends Pane {
     private Rectangle cpu = new Rectangle(60, 175, 40, 100);
     private Rectangle player = new Rectangle(600, 175, 40, 100);
     private Timeline animation;
-
+    
+    private PongPaddleRectangle cpuPaddle = new PongPaddleRectangle(60, 175, 40, 100);
+    private PongPaddleRectangle playerPaddle = new PongPaddleRectangle(600, 175, 40, 100);
    
 
     public PongPane() {
@@ -35,6 +37,8 @@ public class PongPane extends Pane {
         getChildren().add(circle);
         getChildren().add(cpu);
         getChildren().add(player);
+        getChildren().addAll(cpuPaddle.getRectangle());
+        getChildren().addAll(playerPaddle.getRectangle());
 
     
         animation = new Timeline(
@@ -70,6 +74,7 @@ public class PongPane extends Pane {
     }
 
     protected void moveBall() {
+        
         if (x < radius || x > getWidth() - radius) {
             dx *= -1; // Change ball move direction
         }
@@ -77,19 +82,43 @@ public class PongPane extends Pane {
             dy *= -1; // Change ball move direction
         }
         
-        Shape intersectCPU = Shape.intersect(circle, cpu);
-        if (intersectCPU.getBoundsInLocal().getWidth() != -1){
-            dx *= -1;
-        }
-        else if(intersectCPU.getBoundsInLocal().getHeight() != -1){
+        Shape intersectCpuTop = Shape.intersect(circle, cpuPaddle.getLine("Top"));
+        Shape intersectCpuLeft = Shape.intersect(circle, cpuPaddle.getLine("Left"));
+        Shape intersectCpuRight= Shape.intersect(circle, cpuPaddle.getLine("Right"));
+        Shape intersectCpuBottom = Shape.intersect(circle, cpuPaddle.getLine("Bottom"));
+        
+        if (intersectCpuTop.getBoundsInLocal().getWidth() != -1){
             dy *= -1;
         }
-        
-        Shape intersectPlayer = Shape.intersect(circle, player);        
-        if (intersectPlayer.getBoundsInLocal().getWidth() != -1){
-            dx *= -1;           
+        if (intersectCpuLeft.getBoundsInLocal().getWidth() != -1){
+            dx *= -1;
         }
-        else if(intersectPlayer.getBoundsInLocal().getHeight() != -1){
+        if (intersectCpuRight.getBoundsInLocal().getWidth() != -1){
+            dx *= -1;
+        }
+        if (intersectCpuBottom.getBoundsInLocal().getWidth() != -1){
+            dy *= -1;
+        }
+
+        Shape intersectPlayerTop =
+                Shape.intersect(circle, playerPaddle.getLine("Top"));
+        Shape intersectPlayerLeft =
+                Shape.intersect(circle, playerPaddle.getLine("Left"));
+        Shape intersectPlayerRight=
+                Shape.intersect(circle, playerPaddle.getLine("Right"));
+        Shape intersectPlayerBottom =
+                Shape.intersect(circle, playerPaddle.getLine("Bottom"));
+        
+        if (intersectPlayerTop.getBoundsInLocal().getWidth() != -1){
+            dy *= -1;
+        }
+        if (intersectPlayerLeft.getBoundsInLocal().getWidth() != -1){
+            dx *= -1;
+        }
+        if (intersectPlayerRight.getBoundsInLocal().getWidth() != -1){
+            dx *= -1;
+        }
+        if (intersectPlayerBottom.getBoundsInLocal().getWidth() != -1){
             dy *= -1;
         }
         
@@ -100,14 +129,14 @@ public class PongPane extends Pane {
     }
     
     protected void movePlayerUp() {
-        if (player.getY() > 0) {
-            player.setY(player.getY() - 4);
+        if (playerPaddle.getY() > 0) {
+            playerPaddle.decreaseY(4);
         }
     }
     
     protected void movePlayerDown() {
-        if (player.getY() < 250) {
-            player.setY(player.getY() + 4);
+        if (playerPaddle.getY() < 250) {
+            playerPaddle.increaseY(4);
         }
     }
 }

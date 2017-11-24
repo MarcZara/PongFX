@@ -131,7 +131,7 @@ public class PongPane extends Pane {
     protected void movePlayerUp() {
         if (playerPaddle.getY() > 0) {
             playerPaddle.decreaseY(4);
-        }
+       }
     }
     
     protected void movePlayerDown() {

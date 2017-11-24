@@ -78,8 +78,7 @@ public class PongPane extends Pane {
         }
         
         Shape intersectCPU = Shape.intersect(circle, cpu);
-        if (intersectCPU.getBoundsInLocal().getWidth() != -1 &&
-                circle.getCenterY() > cpu.getY()){
+        if (intersectCPU.getBoundsInLocal().getWidth() != -1){
             dx *= -1;
         }
         else if(intersectCPU.getBoundsInLocal().getHeight() != -1){
@@ -87,8 +86,7 @@ public class PongPane extends Pane {
         }
         
         Shape intersectPlayer = Shape.intersect(circle, player);        
-        if (intersectPlayer.getBoundsInLocal().getWidth() != -1 &&
-                circle.getCenterY() > player.getY()){
+        if (intersectPlayer.getBoundsInLocal().getWidth() != -1){
             dx *= -1;           
         }
         else if(intersectPlayer.getBoundsInLocal().getHeight() != -1){

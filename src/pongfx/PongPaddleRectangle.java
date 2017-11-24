@@ -31,12 +31,12 @@ public class PongPaddleRectangle {
 
         leftSide = new Line(topLeftX.get(), topLeftY.get(),
                 bottomLeftX.get(), bottomLeftY.get());
-        bottomSide = new Line(bottomLeftX.get() - 1, bottomLeftY.get(),
-                bottomRightX.get() - 1, bottomRightY.get());
+        bottomSide = new Line(bottomLeftX.get() + 1, bottomLeftY.get() - 1,
+                bottomRightX.get() + 1, bottomRightY.get() - 1);
         rightSide = new Line(bottomRightX.get(), bottomRightY.get(),
                 topRightX.get(), topRightY.get());
-        topSide = new Line(topRightX.get() - 1, topRightY.get(),
-                topLeftX.get() - 1, topLeftY.get()); 
+        topSide = new Line(topRightX.get() + 1, topRightY.get() - 1,
+                topLeftX.get() + 1, topLeftY.get() - 1); 
     }
 
     public void increaseXY(int x, int y) {
@@ -48,20 +48,37 @@ public class PongPaddleRectangle {
         leftSide.setStartX(topLeftX.get() + x);
     }
     
-    public void increaseY(int y){
+    public void moveDown(int y){
+        
         topLeftY.set(topLeftY.get() + y);
+        topRightY.set(topRightY.get() + y);
         bottomLeftY.set(bottomLeftY.get() + y);
+        bottomRightY.set(bottomRightY.get() + y);
+        
         leftSide.setStartY(topLeftY.get());
         leftSide.setEndY(bottomLeftY.get());
-
+        bottomSide.setStartY(bottomLeftY.get());
+        bottomSide.setEndY(bottomRightY.get());
+        rightSide.setStartY(bottomRightY.get());
+        rightSide.setEndY(topRightY.get());
+        topSide.setStartY(topRightY.get());
+        topSide.setEndY(topLeftY.get());
     }
     
-    public void decreaseY(int y){
+    public void moveUp(int y){
         topLeftY.set(topLeftY.get() - y);
+        topRightY.set(topRightY.get() - y);
         bottomLeftY.set(bottomLeftY.get() - y);
+        bottomRightY.set(bottomRightY.get() - y);
+        
         leftSide.setStartY(topLeftY.get());
         leftSide.setEndY(bottomLeftY.get());
-
+        bottomSide.setStartY(bottomLeftY.get());
+        bottomSide.setEndY(bottomRightY.get());
+        rightSide.setStartY(bottomRightY.get());
+        rightSide.setEndY(topRightY.get());
+        topSide.setStartY(topRightY.get());
+        topSide.setEndY(topLeftY.get());
     }
     
     public int getY(){

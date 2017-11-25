@@ -2,94 +2,98 @@
 package pongfx;
 
 import javafx.scene.shape.*;
-import javafx.beans.property.*;
 
 // @author Marc Zara
 public class PongPaddleRectangle {
 
-    private IntegerProperty topLeftX = new SimpleIntegerProperty();
-    private IntegerProperty topLeftY = new SimpleIntegerProperty();
-    private IntegerProperty bottomLeftX = new SimpleIntegerProperty();
-    private IntegerProperty bottomLeftY = new SimpleIntegerProperty();
-    private IntegerProperty bottomRightX = new SimpleIntegerProperty();
-    private IntegerProperty bottomRightY = new SimpleIntegerProperty();
-    private IntegerProperty topRightX = new SimpleIntegerProperty();
-    private IntegerProperty topRightY = new SimpleIntegerProperty();
+    private int topLeftX, topLeftY, bottomLeftX, bottomLeftY,bottomRightX,
+            bottomRightY, topRightX, topRightY;
 
     private Line leftSide, rightSide, topSide, bottomSide;
 
-    public PongPaddleRectangle(int x, int y, int width, int height) {
+    protected PongPaddleRectangle(int x, int y, int width, int height) {
 
-        topLeftX.set(x);
-        topLeftY.set(y);
-        bottomLeftX.set(topLeftX.get());
-        bottomLeftY.set(topLeftY.get() + height);
-        bottomRightX.set(bottomLeftX.get() + width);
-        bottomRightY.set(bottomLeftY.get());
-        topRightX.set(bottomRightX.get());
-        topRightY.set(topLeftY.get());
+        topLeftX = x;
+        topLeftY = y;
+        bottomLeftX = topLeftX;
+        bottomLeftY = topLeftY + height;
+        bottomRightX = bottomLeftX + width;
+        bottomRightY = bottomLeftY;
+        topRightX = bottomRightX;
+        topRightY = topLeftY;
 
-        leftSide = new Line(topLeftX.get(), topLeftY.get(),
-                bottomLeftX.get(), bottomLeftY.get());
-        bottomSide = new Line(bottomLeftX.get() + 1, bottomLeftY.get() - 1,
-                bottomRightX.get() + 1, bottomRightY.get() - 1);
-        rightSide = new Line(bottomRightX.get(), bottomRightY.get(),
-                topRightX.get(), topRightY.get());
-        topSide = new Line(topRightX.get() + 1, topRightY.get() - 1,
-                topLeftX.get() + 1, topLeftY.get() - 1); 
-    }
-
-    public void increaseXY(int x, int y) {
-        topLeftX.add(x);
-        topLeftY.add(y);
+        leftSide = new Line(topLeftX, topLeftY,
+                bottomLeftX, bottomLeftY);
+        bottomSide = new Line(bottomLeftX + 1, bottomLeftY - 1,
+                bottomRightX + 1, bottomRightY - 1);
+        rightSide = new Line(bottomRightX, bottomRightY,
+                topRightX, topRightY);
+        topSide = new Line(topRightX + 1, topRightY - 1,
+                topLeftX + 1, topLeftY - 1); 
     }
     
-    public void increaseX(int x){
-        leftSide.setStartX(topLeftX.get() + x);
-    }
-    
-    public void moveDown(int y){
+    protected void moveDown(int y){
         
-        topLeftY.set(topLeftY.get() + y);
-        topRightY.set(topRightY.get() + y);
-        bottomLeftY.set(bottomLeftY.get() + y);
-        bottomRightY.set(bottomRightY.get() + y);
+        topLeftY = topLeftY + y;
+        topRightY = topRightY + y;
+        bottomLeftY = bottomLeftY + y;
+        bottomRightY = bottomRightY + y;
         
-        leftSide.setStartY(topLeftY.get());
-        leftSide.setEndY(bottomLeftY.get());
-        bottomSide.setStartY(bottomLeftY.get());
-        bottomSide.setEndY(bottomRightY.get());
-        rightSide.setStartY(bottomRightY.get());
-        rightSide.setEndY(topRightY.get());
-        topSide.setStartY(topRightY.get());
-        topSide.setEndY(topLeftY.get());
+        leftSide.setStartY(topLeftY);
+        leftSide.setEndY(bottomLeftY);
+        bottomSide.setStartY(bottomLeftY);
+        bottomSide.setEndY(bottomRightY);
+        rightSide.setStartY(bottomRightY);
+        rightSide.setEndY(topRightY);
+        topSide.setStartY(topRightY);
+        topSide.setEndY(topLeftY);
     }
     
-    public void moveUp(int y){
-        topLeftY.set(topLeftY.get() - y);
-        topRightY.set(topRightY.get() - y);
-        bottomLeftY.set(bottomLeftY.get() - y);
-        bottomRightY.set(bottomRightY.get() - y);
+    protected void moveUp(int y){
+        topLeftY = topLeftY - y;
+        topRightY = topRightY - y;
+        bottomLeftY = bottomLeftY - y;
+        bottomRightY = bottomRightY - y;
         
-        leftSide.setStartY(topLeftY.get());
-        leftSide.setEndY(bottomLeftY.get());
-        bottomSide.setStartY(bottomLeftY.get());
-        bottomSide.setEndY(bottomRightY.get());
-        rightSide.setStartY(bottomRightY.get());
-        rightSide.setEndY(topRightY.get());
-        topSide.setStartY(topRightY.get());
-        topSide.setEndY(topLeftY.get());
+        leftSide.setStartY(topLeftY);
+        leftSide.setEndY(bottomLeftY);
+        bottomSide.setStartY(bottomLeftY);
+        bottomSide.setEndY(bottomRightY);
+        rightSide.setStartY(bottomRightY);
+        rightSide.setEndY(topRightY);
+        topSide.setStartY(topRightY);
+        topSide.setEndY(topLeftY);
     }
     
-    public int getY(){
-        return topLeftY.get();
+    protected void setLocation(int x, int y, int width, int height){
+        topLeftX = x;
+        topLeftY = y;
+        bottomLeftX = topLeftX;
+        bottomLeftY = topLeftY + height;
+        bottomRightX = bottomLeftX + width;
+        bottomRightY = bottomLeftY;
+        topRightX = bottomRightX;
+        topRightY = topLeftY;
+        
+        leftSide.setStartY(topLeftY);
+        leftSide.setEndY(bottomLeftY);
+        bottomSide.setStartY(bottomLeftY);
+        bottomSide.setEndY(bottomRightY);
+        rightSide.setStartY(bottomRightY);
+        rightSide.setEndY(topRightY);
+        topSide.setStartY(topRightY);
+        topSide.setEndY(topLeftY);
     }
     
-    public int getX(){
-        return topLeftX.get();
+    protected int getY(){
+        return topLeftY;
+    }
+    
+    protected int getX(){
+        return topLeftX;
     }
 
-    public Line getLine(String side) {
+    protected Line getLine(String side) {
         switch (side) {
             case "Top":
                 return topSide;
@@ -102,7 +106,7 @@ public class PongPaddleRectangle {
         }
         return null;
     }
-    public Line[] getRectangle(){
+    protected Line[] getRectangle(){
         return new Line[]{leftSide, rightSide, topSide, bottomSide};
     }
 }

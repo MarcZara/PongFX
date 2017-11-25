@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -16,6 +17,7 @@ public class PongFX extends Application {
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
     PongPane pongPane = new PongPane(); // Create a ball pane
+    ScoreBoard scoreBoard = new ScoreBoard();
  
     pongPane.setOnKeyPressed((KeyEvent e) -> {
         if (null != e.getCode()) switch (e.getCode()) {

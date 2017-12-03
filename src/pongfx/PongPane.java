@@ -2,13 +2,14 @@ package pongfx;
 
 // @author Marc Zara
 import javafx.animation.*;
-import javafx.animation.Transition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
+import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 
 public class PongPane extends Pane {
@@ -79,10 +80,10 @@ public class PongPane extends Pane {
 
     protected void moveBall() {
 
-        if (x < radius || x > getWidth() - radius) {
+        if (x < radius || x > 700 - radius) {
             dx *= -1; // Change ball move direction
         }
-        if (y < radius || y > getHeight() - radius) {
+        if (y < radius || y > 350 - radius) {
             dy *= -1; // Change ball move direction
         }
 
@@ -112,12 +113,12 @@ public class PongPane extends Pane {
 
     private void scoring() {
 
-        if (circle.getCenterX() > 500 && x < radius || x > getWidth() - radius) {
+        if (circle.getCenterX() > 500 && x < radius || x > 700 - radius) {
             System.out.println("Cpu goal");
             resetBoard();
         }
 
-        if (circle.getCenterX() < 500 && x < radius || x > getWidth() - radius) {
+        if (circle.getCenterX() < 500 && x < radius || x > 700 - radius) {
             System.out.println("Player goal");
             playerScore += 1000;
             resetBoard();

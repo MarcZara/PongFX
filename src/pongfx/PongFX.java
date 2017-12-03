@@ -16,8 +16,7 @@ import javafx.scene.input.KeyEvent;
 public class PongFX extends Application {
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
-    PongPane pongPane = new PongPane(); // Create a ball pane
-    ScoreBoard scoreBoard = new ScoreBoard();
+    PongPane pongPane = new PongPane();
  
     pongPane.setOnKeyPressed((KeyEvent e) -> {
         if (null != e.getCode()) switch (e.getCode()) {

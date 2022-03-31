@@ -24,12 +24,12 @@ public class PongPaddleRectangle {
 
         leftSide = new Line(topLeftX, topLeftY,
                 bottomLeftX, bottomLeftY);
-        bottomSide = new Line(bottomLeftX + 1, bottomLeftY - 1,
-                bottomRightX + 1, bottomRightY - 1);
+        bottomSide = new Line(bottomLeftX , bottomLeftY,
+                bottomRightX, bottomRightY);
         rightSide = new Line(bottomRightX, bottomRightY,
                 topRightX, topRightY);
-        topSide = new Line(topRightX + 1, topRightY - 1,
-                topLeftX + 1, topLeftY - 1); 
+        topSide = new Line(topRightX, topRightY,
+                topLeftX, topLeftY); 
     }
     
     protected void moveDown(int y){

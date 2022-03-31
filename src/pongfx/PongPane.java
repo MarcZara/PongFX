@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.control.*;
+import javafx.scene.text.*;
 import javafx.util.Duration;
 
 public class PongPane extends Pane {
@@ -22,6 +23,7 @@ public class PongPane extends Pane {
     private Circle circle = new Circle(x, y, radius);
     private Rectangle cpu = new Rectangle(60, 175, 40, 100);
     private Rectangle player = new Rectangle(600, 175, 40, 100);
+    private Text score = new Text(275, 40, "Score: " + playerScore);
 
     private Timeline animation;
 
@@ -39,7 +41,10 @@ public class PongPane extends Pane {
         player.setStroke(Color.BLACK);
         player.setStrokeWidth(3);
         player.setFill(Color.WHEAT);
+        
+        score.setFont(Font.font("Verdana", 25));
 
+        getChildren().add(score);
         getChildren().add(circle);
         getChildren().add(cpu);
         getChildren().add(player);
@@ -90,6 +95,8 @@ public class PongPane extends Pane {
         collisions();
 
         scoring();
+        
+        score.setText("Score: " + playerScore);
 
         x += dx;
         y += dy;
@@ -198,5 +205,8 @@ public class PongPane extends Pane {
     
     protected int getPlayerScore(){
         return playerScore;
+    }
+    private void setPlayerScore(){
+    
     }
 }
